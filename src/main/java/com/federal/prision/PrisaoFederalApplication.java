@@ -1,13 +1,13 @@
-package com.cursobe.cursomc;
+package com.federal.prision;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CursojavaApplication {
+public class PrisaoFederalApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CursojavaApplication.class, args);
+		SpringApplication.run(PrisaoFederalApplication.class, args);
 	}
 
 }
