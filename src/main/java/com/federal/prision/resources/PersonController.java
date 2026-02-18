@@ -1,32 +1,36 @@
 package com.federal.prision.resources;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.federal.prision.domain.Person;
+import com.federal.prision.service.PersonService;
 
 @RestController
-@RequestMapping(value="personController")
+@RequestMapping(value="person")
 public class PersonController {
 
-	DateTimeFormatter formatter =
-	        DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	@Autowired
+	PersonService personService;
+	 
+	@GetMapping
+	public ResponseEntity<List<Person>> findAll() {
+	    List<Person> persons = personService.findAll();
+	    return ResponseEntity.ok(persons);
+	}
+
 	
-	@RequestMapping(method=RequestMethod.GET)
-	public List<Person> getPersons() {
-		
-		List<Person> listPerson = new ArrayList<>();
-		
-		Person person = new Person(1, "125884897", LocalDate.parse("05/12/1993", formatter), "Whiter White", "White@outlook.com"); 
-		listPerson.add(person);
-		
-		return listPerson;
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ResponseEntity<?> getPersonById(@PathVariable Integer id) {
+		Person obj = personService.findById(id);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	

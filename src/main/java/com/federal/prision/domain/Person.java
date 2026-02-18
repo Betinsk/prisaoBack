@@ -1,14 +1,18 @@
 package com.federal.prision.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Person {
@@ -22,6 +26,10 @@ public class Person {
 	private LocalDate birthDate;
 	private String name;
 	private String email;
+	
+	@OneToMany(mappedBy = "person")
+	@JsonManagedReference
+	private List<Adress> adresses = new ArrayList<>();
 	
 	public Person() {
 	}
@@ -73,6 +81,14 @@ public class Person {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public List<Adress> getAdresses() {
+		return adresses;
+	}
+
+	public void setAdresses(List<Adress> adresses) {
+		this.adresses = adresses;
 	}
 
 	@Override
