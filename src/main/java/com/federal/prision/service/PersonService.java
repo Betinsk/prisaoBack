@@ -16,6 +16,10 @@ public class PersonService {
 	@Autowired
 	PersonRepository personRepository;
 	
+	public Person createPerson(Person person) {
+		return personRepository.save(person);
+	}
+	
 	public List<Person> findAll() {
 		return personRepository.findAll();
 	}

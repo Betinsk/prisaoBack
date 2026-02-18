@@ -9,10 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.federal.prision.domain.Adress;
+import com.federal.prision.domain.Address;
 import com.federal.prision.domain.Person;
 import com.federal.prision.repositories.AdressRepository;
 import com.federal.prision.repositories.PersonRepository;
+import com.federal.prision.service.PersonService;
 
 @SpringBootApplication
 public class PrisaoFederalApplication implements CommandLineRunner{
@@ -21,6 +22,9 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	private PersonRepository personRepository;
 	@Autowired
 	private AdressRepository adressRepository;
+	
+	@Autowired
+	private PersonService personService;
 	
 	DateTimeFormatter formatter =
 	        DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -35,10 +39,10 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		
 		Person personOne = new Person(null, "188448443", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com");
 		
-		Adress adress = new Adress(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US");
+		Address adress = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US");
 		adress.setPerson(personOne);
 		personOne.getAdresses().add(adress);
-		personRepository.saveAll(Arrays.asList(personOne));	
+		personRepository.saveAll(Arrays.asList(personOne));
 		adressRepository.saveAll(Arrays.asList(adress));
 
 		

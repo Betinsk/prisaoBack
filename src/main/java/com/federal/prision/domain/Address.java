@@ -12,14 +12,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Adress implements Serializable {
+public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String streetAdress;
-	private String adressComplement;
+	private String streetAddress;
+	private String addressComplement;
 	private String state;
 	private String city;
 	private String country;
@@ -29,14 +29,14 @@ public class Adress implements Serializable {
 	@JsonBackReference
 	private Person person;
 	
-	public Adress() {
+	public Address() {
 		
 	}
 
-	public Adress(Integer id, String streetAdress, String adressComplement, String state, String city, String country) {
+	public Address(Integer id, String streetAdress, String adressComplement, String state, String city, String country) {
 		this.id = id;
-		this.streetAdress = streetAdress;
-		this.adressComplement = adressComplement;
+		this.streetAddress = streetAdress;
+		this.addressComplement = adressComplement;
 		this.state = state;
 		this.city = city;
 		this.country = country;
@@ -51,19 +51,19 @@ public class Adress implements Serializable {
 	}
 	
 	public String getStreetAdress() {
-		return streetAdress;
+		return streetAddress;
 	}
 
 	public void setStreetAdress(String streetAdress) {
-		this.streetAdress = streetAdress;
+		this.streetAddress = streetAdress;
 	}
 
 	public String getAdressComplement() {
-		return adressComplement;
+		return addressComplement;
 	}
 
 	public void setAdressComplement(String adressComplement) {
-		this.adressComplement = adressComplement;
+		this.addressComplement = adressComplement;
 	}
 
 	public String getState() {

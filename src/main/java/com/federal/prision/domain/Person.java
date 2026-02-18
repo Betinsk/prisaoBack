@@ -29,13 +29,12 @@ public class Person {
 	
 	@OneToMany(mappedBy = "person")
 	@JsonManagedReference
-	private List<Adress> adresses = new ArrayList<>();
+	private List<Address> addresses = new ArrayList<>();
 	
 	public Person() {
 	}
 
 	public Person(Integer id, String socialSecurity, LocalDate birthDate, String name, String email) {
-		super();
 		this.id = id;
 		this.socialSecurity = socialSecurity;
 		this.birthDate = birthDate;
@@ -83,12 +82,12 @@ public class Person {
 		this.email = email;
 	}
 	
-	public List<Adress> getAdresses() {
-		return adresses;
+	public List<Address> getAdresses() {
+		return addresses;
 	}
 
-	public void setAdresses(List<Adress> adresses) {
-		this.adresses = adresses;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 
 	@Override

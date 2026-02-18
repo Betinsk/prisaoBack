@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.federal.prision.domain.Adress;
+import com.federal.prision.domain.Address;
 import com.federal.prision.service.AdressService;
 
 @RestController
@@ -20,7 +20,7 @@ public class AdressController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> findAll() {
-		List<Adress> adresses = adressService.findAll();
+		List<Address> adresses = adressService.findAll();
 		return ResponseEntity.ok().body(adresses);
 
 	}
