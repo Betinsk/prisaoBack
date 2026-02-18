@@ -8,6 +8,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +28,10 @@ public class Person {
 	private String name;
 	private String email;
 	
-	@OneToMany(mappedBy = "person")
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	private List<Address> addresses = new ArrayList<>();
+
 	
 	public Person() {
 	}
@@ -82,12 +84,20 @@ public class Person {
 		this.email = email;
 	}
 	
-	public List<Address> getAdresses() {
+	public List<Address> getAddresses() {
 		return addresses;
+	}
+	
+	public void addAddress(Address address) {
+	    addresses.add(address);
+	    address.setPerson(this); // garante que o lado dono da relação saiba quem é o Person
 	}
 
 	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
+	    this.addresses.clear();          // limpa a lista atual
+	    for (Address addr : addresses) { // percorre cada endereço
+	        addAddress(addr);            // usa método helper para setar person
+	    }
 	}
 
 	@Override

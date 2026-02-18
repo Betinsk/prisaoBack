@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.federal.prision.domain.Address;
-import com.federal.prision.service.AdressService;
+import com.federal.prision.service.AddressService;
 
 @RestController
-@RequestMapping(value="adress")
-public class AdressController {
+@RequestMapping(value="address")
+public class AddressController {
 
 	@Autowired
-	AdressService adressService;
+	AddressService addressService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<?> findAll() {
-		List<Address> adresses = adressService.findAll();
-		return ResponseEntity.ok().body(adresses);
+		List<Address> addresses = addressService.findAll();
+		return ResponseEntity.ok().body(addresses);
 
 	}
 	

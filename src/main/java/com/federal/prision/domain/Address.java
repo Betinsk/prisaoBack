@@ -33,10 +33,10 @@ public class Address implements Serializable {
 		
 	}
 
-	public Address(Integer id, String streetAdress, String adressComplement, String state, String city, String country) {
+	public Address(Integer id, String streetAddress, String addressComplement, String state, String city, String country) {
 		this.id = id;
-		this.streetAddress = streetAdress;
-		this.addressComplement = adressComplement;
+		this.streetAddress = streetAddress;
+		this.addressComplement = addressComplement;
 		this.state = state;
 		this.city = city;
 		this.country = country;
@@ -50,20 +50,20 @@ public class Address implements Serializable {
 		this.id = id;
 	}
 	
-	public String getStreetAdress() {
+	public String getStreetAddress() {
 		return streetAddress;
 	}
 
-	public void setStreetAdress(String streetAdress) {
-		this.streetAddress = streetAdress;
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
 	}
 
-	public String getAdressComplement() {
+	public String getAddressComplement() {
 		return addressComplement;
 	}
 
-	public void setAdressComplement(String adressComplement) {
-		this.addressComplement = adressComplement;
+	public void setAddressComplement(String addressComplement) {
+		this.addressComplement = addressComplement;
 	}
 
 	public String getState() {

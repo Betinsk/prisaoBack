@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.federal.prision.domain.Address;
 import com.federal.prision.exceptions.ObjectNotFoundException;
-import com.federal.prision.repositories.AdressRepository;
+import com.federal.prision.repositories.AddressRepository;
 
 @Service
-public class AdressService {
+public class AddressService {
 
 	@Autowired
-	AdressRepository adressRepository;
+	AddressRepository adressRepository;
 	
 	public List<Address> findAll() {
 		 List<Address> adressList = adressRepository.findAll();

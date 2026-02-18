@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.federal.prision.domain.Address;
 import com.federal.prision.domain.Person;
-import com.federal.prision.repositories.AdressRepository;
+import com.federal.prision.repositories.AddressRepository;
 import com.federal.prision.repositories.PersonRepository;
 import com.federal.prision.service.PersonService;
 
@@ -21,7 +21,7 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	@Autowired
 	private PersonRepository personRepository;
 	@Autowired
-	private AdressRepository adressRepository;
+	private AddressRepository addressRepository;
 	
 	@Autowired
 	private PersonService personService;
@@ -39,11 +39,11 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		
 		Person personOne = new Person(null, "188448443", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com");
 		
-		Address adress = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US");
-		adress.setPerson(personOne);
-		personOne.getAdresses().add(adress);
+		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US");
+		address.setPerson(personOne);
+		personOne.getAddresses().add(address);
 		personRepository.saveAll(Arrays.asList(personOne));
-		adressRepository.saveAll(Arrays.asList(adress));
+		addressRepository.saveAll(Arrays.asList(address));
 
 		
 	}
