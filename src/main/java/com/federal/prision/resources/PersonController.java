@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +20,10 @@ import com.federal.prision.service.PersonService;
 @RestController
 @RequestMapping(value="person")
 public class PersonController {
-
+ 
 	@Autowired
-	PersonService personService;
+	PersonService personService; 
+	
 	 
 	@PostMapping
 	public ResponseEntity<Person> createPerson(@RequestBody Person person) {
@@ -39,6 +41,20 @@ public class PersonController {
 	public ResponseEntity<?> getPersonById(@PathVariable Integer id) {
 		Person obj = personService.findById(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deletePerson(@PathVariable Integer id) {
+		boolean deleted = personService.deletePerson(id);
+		if(deleted) {
+			return ResponseEntity.ok("Person with Id "+ id+ " sucessfull deleted");
+		}
+		else {
+			   return ResponseEntity
+		                .status(HttpStatus.NOT_FOUND)
+		                .body("Person with ID " + id + " not found."); 
+		}
+		
 	}
 	
 	

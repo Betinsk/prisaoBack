@@ -23,7 +23,6 @@ public class Person {
 	private Integer id;
 	private String socialSecurity;
 	
-	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
 	private String name;
 	private String email;

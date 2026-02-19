@@ -28,6 +28,15 @@ public class PersonService {
 		Optional<Person> obj = personRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Object Not Found "+ id+ ", Type: "+ Person.class.getName()));
-		
+	}
+	
+	public boolean deletePerson(Integer id) {
+		if (personRepository.existsById(id)) {
+			personRepository.deleteById(id);
+            return true;
+        } else {
+        	throw new ObjectNotFoundException(
+    				"Object Not Found "+ id+ ", Type: "+ Person.class.getName());
+        }
 	}
 }
