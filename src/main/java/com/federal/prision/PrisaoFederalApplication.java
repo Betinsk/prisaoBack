@@ -13,7 +13,6 @@ import com.federal.prision.domain.Address;
 import com.federal.prision.domain.Person;
 import com.federal.prision.repositories.AddressRepository;
 import com.federal.prision.repositories.PersonRepository;
-import com.federal.prision.service.PersonService;
 
 @SpringBootApplication
 public class PrisaoFederalApplication implements CommandLineRunner{
@@ -22,9 +21,6 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	private PersonRepository personRepository;
 	@Autowired
 	private AddressRepository addressRepository;
-	
-	@Autowired
-	private PersonService personService;
 	
 	DateTimeFormatter formatter =
 	        DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -39,12 +35,11 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		
 		Person personOne = new Person(null, "188448443", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com");
 		
-		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US");
+		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 		address.setPerson(personOne);
 		personOne.getAddresses().add(address);
 		personRepository.saveAll(Arrays.asList(personOne));
 		addressRepository.saveAll(Arrays.asList(address));
-
 		
 	}
 

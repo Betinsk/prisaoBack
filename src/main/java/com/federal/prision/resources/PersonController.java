@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +25,6 @@ public class PersonController {
 	@Autowired
 	PersonService personService; 
 	
-	 
 	@PostMapping
 	public ResponseEntity<Person> createPerson(@RequestBody Person person) {
 		Person newPerson = personService.createPerson(person);
@@ -38,13 +38,19 @@ public class PersonController {
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> getPersonById(@PathVariable Integer id) {
+	public ResponseEntity<?> getPersonById(@PathVariable Long id) {
 		Person obj = personService.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@PutMapping("/{id}")
+	public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person personRequest) {
+	  Person person = personService.updatePerson(id, personRequest);
+	     return ResponseEntity.ok().body(person);
+	     }
+	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deletePerson(@PathVariable Integer id) {
+	public ResponseEntity<String> deletePerson(@PathVariable Long id) {
 		boolean deleted = personService.deletePerson(id);
 		if(deleted) {
 			return ResponseEntity.ok("Person with Id "+ id+ " sucessfull deleted");

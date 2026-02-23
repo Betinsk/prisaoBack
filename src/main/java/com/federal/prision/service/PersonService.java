@@ -16,6 +16,7 @@ public class PersonService {
 	@Autowired
 	PersonRepository personRepository;
 	
+	
 	public Person createPerson(Person person) {
 		return personRepository.save(person);
 	}
@@ -24,13 +25,27 @@ public class PersonService {
 		return personRepository.findAll();
 	}
 	
-	public Person findById(Integer id) {
+	public Person findById(Long id) {
 		Optional<Person> obj = personRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Object Not Found "+ id+ ", Type: "+ Person.class.getName()));
 	}
 	
-	public boolean deletePerson(Integer id) {
+	public Person updatePerson(Long id, Person personRequest) {
+		Person person = personRepository.findById(id).orElseThrow(
+		() -> new RuntimeException("User not found"));
+		
+		System.out.println(person);
+		
+		person.setSocialSecurity(person.getSocialSecurity());
+		person.setBirthDate(person.getBirthDate());
+		person.setName(personRequest.getName());
+		person.setEmail(personRequest.getEmail());
+		return personRepository.save(person);
+		
+	}
+	
+	public boolean deletePerson(Long id) {
 		if (personRepository.existsById(id)) {
 			personRepository.deleteById(id);
             return true;

@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +15,7 @@ import com.federal.prision.domain.Address;
 import com.federal.prision.service.AddressService;
 
 @RestController
-@RequestMapping(value="address")
+@RequestMapping(value="addresses")
 public class AddressController {
 
 	@Autowired
@@ -24,5 +27,13 @@ public class AddressController {
 		return ResponseEntity.ok().body(addresses);
 
 	}
+	
+	@PostMapping("/persons/{personId}/addresses")
+	    public Address create(
+	        @PathVariable Long personId,
+	        @RequestBody Address address
+	    ) {
+	        return addressService.createAddress(address, personId);
+	    }
 	
 }
