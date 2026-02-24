@@ -1,6 +1,7 @@
 package com.federal.prision.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,11 @@ public class AddressService {
 	}
 	
 	
+	public Address findById(Long id) {
+		Optional<Address> address = addressRepository.findById(id);
+		return address.orElseThrow(() -> new ObjectNotFoundException(
+				"Object Not Found "+ id+ ", Type: "+ Address.class.getName()));	
+	}
 	
 	public List<Address> findAll() {
 		 List<Address> adressList = addressRepository.findAll();

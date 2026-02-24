@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.federal.prision.domain.Person;
@@ -37,8 +36,8 @@ public class PersonController {
 	    return ResponseEntity.ok(persons);
 	}
 
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> getPersonById(@PathVariable Long id) {
+	@GetMapping("/{id}")
+	public ResponseEntity<?> findById(@PathVariable Long id) {
 		Person obj = personService.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
