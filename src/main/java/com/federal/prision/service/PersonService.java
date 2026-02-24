@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.federal.prision.domain.Person;
@@ -45,13 +46,13 @@ public class PersonService {
 		
 	}
 	
-	public boolean deletePerson(Long id) {
-		if (personRepository.existsById(id)) {
-			personRepository.deleteById(id);
-            return true;
-        } else {
-        	throw new ObjectNotFoundException(
-    				"Object Not Found "+ id+ ", Type: "+ Person.class.getName());
-        }
+	public void deletePerson(Long id) {
+		 try {
+		        personRepository.deleteById(id);
+		    } catch (EmptyResultDataAccessException e) {
+		        throw new ObjectNotFoundException(
+		            "Object Not Found " + id + ", Type: " + Person.class.getName()
+		        );
+		    }
 	}
 }

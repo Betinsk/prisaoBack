@@ -49,18 +49,11 @@ public class PersonController {
 	     }
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deletePerson(@PathVariable Long id) {
-		boolean deleted = personService.deletePerson(id);
-		if(deleted) {
-			return ResponseEntity.ok("Person with Id "+ id+ " sucessfull deleted");
-		}
-		else {
-			   return ResponseEntity
-		                .status(HttpStatus.NOT_FOUND)
-		                .body("Person with ID " + id + " not found."); 
+	public ResponseEntity<Void> deletePerson(@PathVariable Long id) {
+		personService.deletePerson(id);
+			   return ResponseEntity.noContent().build();
+		                
 		}
 		
 	}
 	
-	
-}

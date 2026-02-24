@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.federal.prision.domain.Address;
@@ -28,7 +29,6 @@ public class AddressService {
 		return addressRepository.save(address);
 	}
 	
-	
 	public Address findById(Long id) {
 		Optional<Address> address = addressRepository.findById(id);
 		return address.orElseThrow(() -> new ObjectNotFoundException(
@@ -44,4 +44,17 @@ public class AddressService {
 		    }
 		    return adressList;
 	}
+	
+	public void deleteAdress(Long id) {
+		 try {
+		        addressRepository.deleteById(id);
+		    } catch (EmptyResultDataAccessException e) {
+		        throw new ObjectNotFoundException(
+		            "Object Not Found " + id + ", Type: " + Address.class.getName()
+		        );
+		    }
+	}
+	
+	
+	
 }

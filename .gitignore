@@ -4,6 +4,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Arquivos de configuração locais
+src/main/resources/application-*.properties
+
 ### STS ###
 .apt_generated
 .classpath
@@ -12,6 +15,10 @@ target/
 .settings
 .springBeans
 .sts4-cache
+
+# Configurações sensíveis (NÃO subir)
+application-dev.properties
+application-prod.properties
 
 ### IntelliJ IDEA ###
 .idea
