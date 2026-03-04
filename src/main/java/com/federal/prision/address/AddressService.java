@@ -1,4 +1,4 @@
-package com.federal.prision.service;
+package com.federal.prision.address;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.federal.prision.domain.Address;
-import com.federal.prision.domain.Person;
 import com.federal.prision.exceptions.ObjectNotFoundException;
-import com.federal.prision.repositories.AddressRepository;
-import com.federal.prision.repositories.PersonRepository;
+import com.federal.prision.person.Person;
+import com.federal.prision.person.PersonRepository;
 
 @Service
 public class AddressService {

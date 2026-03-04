@@ -1,8 +1,9 @@
-package com.federal.prision.domain;
+package com.federal.prision.address;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.federal.prision.person.Person;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

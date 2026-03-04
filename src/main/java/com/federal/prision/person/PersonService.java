@@ -1,4 +1,4 @@
-package com.federal.prision.service;
+package com.federal.prision.person;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.federal.prision.domain.Person;
 import com.federal.prision.exceptions.ObjectNotFoundException;
-import com.federal.prision.repositories.PersonRepository;
 
 @Service
 public class PersonService {

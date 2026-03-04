@@ -9,10 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.federal.prision.domain.Address;
-import com.federal.prision.domain.Person;
-import com.federal.prision.repositories.AddressRepository;
-import com.federal.prision.repositories.PersonRepository;
+import com.federal.prision.address.Address;
+import com.federal.prision.address.AddressRepository;
+import com.federal.prision.person.Person;
+import com.federal.prision.person.PersonRepository;
 
 @SpringBootApplication
 public class PrisaoFederalApplication implements CommandLineRunner{

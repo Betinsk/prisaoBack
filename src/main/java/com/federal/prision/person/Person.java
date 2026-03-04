@@ -1,4 +1,4 @@
-package com.federal.prision.domain;
+package com.federal.prision.person;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.federal.prision.address.Address;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
