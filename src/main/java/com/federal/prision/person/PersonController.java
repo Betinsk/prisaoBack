@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.federal.prision.person.dto.PersonDto;
+
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value="person")
 public class PersonController {
@@ -22,8 +26,8 @@ public class PersonController {
 	PersonService personService; 
 	
 	@PostMapping
-	public ResponseEntity<Person> createPerson(@RequestBody Person person) {
-		Person newPerson = personService.createPerson(person);
+	public ResponseEntity<Person> createPerson(@RequestBody @Valid PersonDto personDto) {
+		Person newPerson = personService.createPerson(personService.fromDto(personDto));
 		return ResponseEntity.status(HttpStatus.CREATED).body(newPerson);
 	}
 	
