@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.federal.prision.address.dto.AddressDto;
 import com.federal.prision.exceptions.ObjectNotFoundException;
 import com.federal.prision.person.Person;
 import com.federal.prision.person.PersonRepository;
@@ -19,6 +20,23 @@ public class AddressService {
 	
 	@Autowired
 	PersonRepository personRepository;
+	
+	
+	public Address fromDto(AddressDto addressDto) {
+		Address address = new Address();
+		address.setStreet(addressDto.getStreet());
+		address.setAddressComplement(addressDto.getAddressComplement());
+		address.setState(addressDto.getState());
+		address.setCity(addressDto.getCity());
+		address.setCountry(addressDto.getCountry());
+		
+		Person person = new Person();
+	    person.setId(addressDto.getPersonId());
+
+	    address.setPerson(person);
+		
+	    return address;
+	}
 	
 	public Address createAddress(Address address, Long personId) {
 		Person person = personRepository.findById(personId)

@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.federal.prision.address.dto.AddressDto;
+
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value="addresses")
 public class AddressController {
@@ -35,9 +39,9 @@ public class AddressController {
 	@PostMapping("/persons/{personId}/addresses")
 	    public Address create(
 	        @PathVariable Long personId,
-	        @RequestBody Address address
+	        @Valid @RequestBody AddressDto addressDto
 	    ) {
-	        return addressService.createAddress(address, personId);
+	        return addressService.createAddress(addressService.fromDto(addressDto), personId);
 	    }
 	
 	@PutMapping("/{id}")

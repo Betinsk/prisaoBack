@@ -36,7 +36,6 @@ public class Address implements Serializable {
 	
 	public Address(Long id, String street, String addressComplement, String state, String city, String country,
 			Person person) {
-		super();
 		this.id = id;
 		this.street = street;
 		this.addressComplement = addressComplement;
