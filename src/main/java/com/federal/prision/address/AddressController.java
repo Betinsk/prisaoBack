@@ -1,4 +1,4 @@
-package com.federal.prision.resources;
+package com.federal.prision.address;
 
 import java.util.List;
 
@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.federal.prision.domain.Address;
-import com.federal.prision.service.AddressService;
 
 @RestController
 @RequestMapping(value="addresses")

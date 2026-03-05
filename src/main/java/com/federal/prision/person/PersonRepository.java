@@ -1,11 +1,10 @@
-package com.federal.prision.repositories;
+package com.federal.prision.person;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.federal.prision.domain.Person;
-
 @Repository
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
+	boolean existsBySocialSecurity(String socialSecurity);
 }

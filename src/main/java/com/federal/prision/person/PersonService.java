@@ -1,4 +1,4 @@
-package com.federal.prision.service;
+package com.federal.prision.person;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.federal.prision.domain.Person;
 import com.federal.prision.exceptions.ObjectNotFoundException;
-import com.federal.prision.repositories.PersonRepository;
+import com.federal.prision.person.dto.PersonDto;
 
 @Service
 public class PersonService {
@@ -18,7 +17,20 @@ public class PersonService {
 	PersonRepository personRepository;
 	
 	
+	public Person fromDto(PersonDto personDto) {
+		Person person = new Person();
+		person.setSocialSecurity(personDto.getSocialSecurity());
+	    person.setBirthDate(personDto.getBirthDate());
+		person.setName(personDto.getName());
+		person.setEmail(personDto.getEmail());
+	    return person;
+	}
+	
 	public Person createPerson(Person person) {
+		
+		if(personRepository.existsBySocialSecurity(person.getSocialSecurity())) {
+			throw new RuntimeException("Social Security already registered");
+		}
 		return personRepository.save(person);
 	}
 	
