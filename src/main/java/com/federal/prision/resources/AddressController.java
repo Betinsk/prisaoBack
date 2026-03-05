@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,12 @@ public class AddressController {
 	    ) {
 	        return addressService.createAddress(address, personId);
 	    }
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<Address> updateAddress(@PathVariable Long id, @RequestBody Address addressRequest) {
+	Address address = addressService.updateAddress(id, addressRequest);
+	     return ResponseEntity.ok().body(address);
+	     }
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteAddress(@PathVariable Long id) {

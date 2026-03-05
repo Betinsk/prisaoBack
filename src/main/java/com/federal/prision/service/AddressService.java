@@ -45,6 +45,18 @@ public class AddressService {
 		    return adressList;
 	}
 	
+	public Address updateAddress(Long id, Address addressRequest) {
+		Address address = addressRepository.findById(id).orElseThrow(
+				() -> new RuntimeException("User not found"));
+		
+		address.setStreet(addressRequest.getStreet());
+		address.setAddressComplement(addressRequest.getAddressComplement());
+		address.setState(addressRequest.getState());
+		address.setCity(addressRequest.getCity());
+		address.setCountry(addressRequest.getCountry());
+		return addressRepository.save(address);
+	}
+	
 	public void deleteAdress(Long id) {
 		 try {
 		        addressRepository.deleteById(id);

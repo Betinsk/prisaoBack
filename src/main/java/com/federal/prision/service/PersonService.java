@@ -35,11 +35,9 @@ public class PersonService {
 	public Person updatePerson(Long id, Person personRequest) {
 		Person person = personRepository.findById(id).orElseThrow(
 		() -> new RuntimeException("User not found"));
-		
-		System.out.println(person);
-		
-		person.setSocialSecurity(person.getSocialSecurity());
-		person.setBirthDate(person.getBirthDate());
+				
+		person.setSocialSecurity(personRequest.getSocialSecurity());
+		person.setBirthDate(personRequest.getBirthDate());
 		person.setName(personRequest.getName());
 		person.setEmail(personRequest.getEmail());
 		return personRepository.save(person);
