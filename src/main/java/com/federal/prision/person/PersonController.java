@@ -25,11 +25,18 @@ public class PersonController {
 	@Autowired
 	PersonService personService; 
 	
-	@PostMapping
+/*	@PostMapping
 	public ResponseEntity<Person> createPerson(@RequestBody @Valid PersonDto personDto) {
 		Person newPerson = personService.createPerson(personService.fromDto(personDto));
 		return ResponseEntity.status(HttpStatus.CREATED).body(newPerson);
 	}
+	*/
+	@PostMapping
+	public ResponseEntity<Person> createPersonWithAddress(@Valid @RequestBody PersonDto personDto) {
+	    Person person = personService.createPersonWithAddress(personDto);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(person);
+	}
+	
 	
 	@GetMapping
 	public ResponseEntity<List<Person>> findAll() {

@@ -2,6 +2,9 @@ package com.federal.prision.person.dto;
 
 import java.time.LocalDate;
 
+import com.federal.prision.address.dto.AddressDto;
+
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -21,6 +24,10 @@ public class PersonDto {
     @NotBlank(message = "Email is required")
     private String email;
 
+    @Valid
+    private AddressDto addressDto;
+
+    
     public PersonDto() {
     }
     
@@ -28,7 +35,6 @@ public class PersonDto {
 			@NotNull(message = "Date of birth is required") @Past LocalDate birthDate,
 			@NotBlank(message = "Name is required") String name,
 			@NotBlank(message = "Email is required") String email) {
-		super();
 		this.socialSecurity = socialSecurity;
 		this.birthDate = birthDate;
 		this.name = name;
@@ -67,6 +73,12 @@ public class PersonDto {
 		this.email = email;
 	}
 	
-	
+	public AddressDto getAddressDto() {
+	    return addressDto;
+	}
+
+	public void setAddressDto(AddressDto addressDto) {
+	    this.addressDto = addressDto;
+	}
     
 }

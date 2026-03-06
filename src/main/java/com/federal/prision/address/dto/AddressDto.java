@@ -21,6 +21,7 @@ public class AddressDto  implements Serializable {
 		
 		@NotBlank(message = "City is required")
 		private String country;
+		
 		private Long personId;
 
 		public AddressDto() {

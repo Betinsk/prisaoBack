@@ -12,6 +12,8 @@ import com.federal.prision.exceptions.ObjectNotFoundException;
 import com.federal.prision.person.Person;
 import com.federal.prision.person.PersonRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class AddressService {
 

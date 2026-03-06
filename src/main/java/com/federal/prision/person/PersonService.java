@@ -7,8 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.federal.prision.address.Address;
+import com.federal.prision.address.AddressService;
+import com.federal.prision.address.dto.AddressDto;
 import com.federal.prision.exceptions.ObjectNotFoundException;
 import com.federal.prision.person.dto.PersonDto;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class PersonService {
@@ -16,6 +21,8 @@ public class PersonService {
 	@Autowired
 	PersonRepository personRepository;
 	
+	@Autowired
+	AddressService addressService;
 	
 	public Person fromDto(PersonDto personDto) {
 		Person person = new Person();
@@ -33,6 +40,19 @@ public class PersonService {
 		}
 		return personRepository.save(person);
 	}
+	
+		
+	@Transactional
+	public Person createPersonWithAddress(PersonDto personDto) {
+		 Person person = fromDto(personDto);
+		createPerson(person);
+	    AddressDto addressDto = personDto.getAddressDto();
+	     Address  address = addressService.fromDto(addressDto);
+	    addressService.createAddress(address, person.getId());
+	    return person;
+
+	}
+	
 	
 	public List<Person> findAll() {
 		return personRepository.findAll();
