@@ -11,11 +11,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.federal.prision.address.Address;
 import com.federal.prision.address.AddressRepository;
+import com.federal.prision.inmate.Inmate;
+import com.federal.prision.inmate.InmateRepository;
 import com.federal.prision.person.Person;
 import com.federal.prision.person.PersonRepository;
 
 @SpringBootApplication
 public class PrisaoFederalApplication implements CommandLineRunner{
+
+	
+	@Autowired
+    private InmateRepository inmateRepository;
 
 	@Autowired
 	private PersonRepository personRepository;
@@ -33,14 +39,27 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-	/*	Person personOne = new Person(null, "188148443", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com");
+		Person personOne = new Person(null, "188148443", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com");
 		
 		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 		address.setPerson(personOne);
 		personOne.getAddresses().add(address);
 		personRepository.saveAll(Arrays.asList(personOne));
 		addressRepository.saveAll(Arrays.asList(address));
-		*/
+		
+		Address inmateAddress = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
+
+		
+		Inmate inmate = new Inmate(null, "548545", LocalDate.parse("25/12/1971", formatter), "Whiter White", "WWhite@gmail.com", "Drug dealer", LocalDate.parse("25/05/2008", formatter), 32);
+		Inmate inmate2 = new Inmate(null, "849498489", LocalDate.parse("21/12/1991", formatter), "Jessy Pinkman", "Pinkmane@gmail.com", "Drug dealer", LocalDate.parse("30/05/2008", formatter), 28);
+		
+		
+		inmateAddress.setPerson(inmate);
+		inmate.getAddresses().add(inmateAddress); 
+		inmateRepository.saveAll(Arrays.asList(inmate, inmate2));
+		addressRepository.saveAll(Arrays.asList(inmateAddress));
+
+		
 	}
 
 }
