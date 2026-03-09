@@ -25,9 +25,9 @@ public class PersonDto {
     private String email;
 
     @Valid
+    @NotNull(message = "Address is required")
     private AddressDto addressDto;
 
-    
     public PersonDto() {
     }
     

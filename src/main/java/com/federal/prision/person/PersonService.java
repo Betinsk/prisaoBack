@@ -12,6 +12,9 @@ import com.federal.prision.address.AddressService;
 import com.federal.prision.address.dto.AddressDto;
 import com.federal.prision.exceptions.ObjectNotFoundException;
 import com.federal.prision.person.dto.PersonDto;
+import com.federal.prision.resource.exceptions.DatabaseException;
+import com.federal.prision.resource.exceptions.ResourceNotFoundException;
+import com.federal.prision.resource.exceptions.ValidationException;
 
 import jakarta.transaction.Transactional;
 
@@ -36,20 +39,20 @@ public class PersonService {
 	public Person createPerson(Person person) {
 		
 		if(personRepository.existsBySocialSecurity(person.getSocialSecurity())) {
-			throw new RuntimeException("Social Security already registered");
+			throw new DatabaseException ("Social Security already registered");
 		}
 		return personRepository.save(person);
 	}
 	
 		
 	@Transactional
-	public Person createPersonWithAddress(PersonDto personDto) {
-		 Person person = fromDto(personDto);
+		public Person createPersonWithAddress(PersonDto personDto) {
+		Person person = fromDto(personDto);
 		createPerson(person);
-	    AddressDto addressDto = personDto.getAddressDto();
-	     Address  address = addressService.fromDto(addressDto);
-	    addressService.createAddress(address, person.getId());
-	    return person;
+		AddressDto addressDto = personDto.getAddressDto();
+		Address  address = addressService.fromDto(addressDto);
+		addressService.createAddress(address, person.getId());
+		return person;
 
 	}
 	
@@ -59,14 +62,14 @@ public class PersonService {
 	}
 	
 	public Person findById(Long id) {
-		Optional<Person> obj = personRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Object Not Found "+ id+ ", Type: "+ Person.class.getName()));
+		return personRepository.findById(id)
+	            .orElseThrow(() -> new ResourceNotFoundException(
+	                    "Person not found. Id: " + id));
 	}
 	
 	public Person updatePerson(Long id, Person personRequest) {
 		Person person = personRepository.findById(id).orElseThrow(
-		() -> new RuntimeException("User not found"));
+		() -> new ResourceNotFoundException("User not found"));
 				
 		person.setSocialSecurity(personRequest.getSocialSecurity());
 		person.setBirthDate(personRequest.getBirthDate());
@@ -80,7 +83,7 @@ public class PersonService {
 		 try {
 		        personRepository.deleteById(id);
 		    } catch (EmptyResultDataAccessException e) {
-		        throw new ObjectNotFoundException(
+		        throw new ResourceNotFoundException(
 		            "Object Not Found " + id + ", Type: " + Person.class.getName()
 		        );
 		    }
