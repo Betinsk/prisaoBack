@@ -45,13 +45,15 @@ public class PersonService {
 	}
 	
 		
-	@Transactional
+		@Transactional
 		public Person createPersonWithAddress(PersonDto personDto) {
 		Person person = fromDto(personDto);
 		createPerson(person);
-		AddressDto addressDto = personDto.getAddressDto();
-		Address  address = addressService.fromDto(addressDto);
-		addressService.createAddress(address, person.getId());
+		List<AddressDto> addressDto = personDto.getAddresses();
+		 for (AddressDto dto : addressDto) {
+		        Address address = addressService.fromDto(dto);
+		        addressService.createAddress(address, person.getId());
+		    }
 		return person;
 
 	}

@@ -1,6 +1,7 @@
 package com.federal.prision.person.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.federal.prision.address.dto.AddressDto;
 
@@ -26,7 +27,7 @@ public class PersonDto {
 
     @Valid
     @NotNull(message = "Address is required")
-    private AddressDto addressDto;
+    private List<AddressDto> addresses;
 
     public PersonDto() {
     }
@@ -72,13 +73,15 @@ public class PersonDto {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public AddressDto getAddressDto() {
-	    return addressDto;
+
+	public List<AddressDto> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddressDto(AddressDto addressDto) {
-	    this.addressDto = addressDto;
+	public void setAddresses(List<AddressDto> addresses) {
+		this.addresses = addresses;
 	}
+	
+
     
 }
