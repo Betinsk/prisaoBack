@@ -2,8 +2,6 @@ package com.federal.prision.person.dto;
 
 import java.time.LocalDate;
 
-import com.federal.prision.person.Person;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -57,10 +55,5 @@ public class PersonUpdateDto {
 		this.email = email;
 	}
     
-	public void updateFromDto(PersonUpdateDto personUpdateDto, Person person) {
-	    person.setName(personUpdateDto.getName());
-	    person.setEmail(personUpdateDto.getEmail());
-	    person.setBirthDate(personUpdateDto.getBirthDate());
-	}
-	
+
 }
