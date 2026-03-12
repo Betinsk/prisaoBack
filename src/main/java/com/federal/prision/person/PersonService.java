@@ -1,7 +1,6 @@
 package com.federal.prision.person;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -10,11 +9,11 @@ import org.springframework.stereotype.Service;
 import com.federal.prision.address.Address;
 import com.federal.prision.address.AddressService;
 import com.federal.prision.address.dto.AddressDto;
-import com.federal.prision.exceptions.ObjectNotFoundException;
+import com.federal.prision.mapper.PersonMapper;
 import com.federal.prision.person.dto.PersonDto;
+import com.federal.prision.person.dto.PersonUpdateDto;
 import com.federal.prision.resource.exceptions.DatabaseException;
 import com.federal.prision.resource.exceptions.ResourceNotFoundException;
-import com.federal.prision.resource.exceptions.ValidationException;
 
 import jakarta.transaction.Transactional;
 
@@ -26,6 +25,9 @@ public class PersonService {
 	
 	@Autowired
 	AddressService addressService;
+	
+    private final PersonMapper personMapper = new PersonMapper();
+
 	
 	public Person fromDto(PersonDto personDto) {
 		Person person = new Person();
@@ -69,14 +71,12 @@ public class PersonService {
 	                    "Person not found. Id: " + id));
 	}
 	
-	public Person updatePerson(Long id, Person personRequest) {
+	public Person updatePerson(Long id, PersonUpdateDto personUpdateDto) {
 		Person person = personRepository.findById(id).orElseThrow(
-		() -> new ResourceNotFoundException("User not found"));
+		() -> new ResourceNotFoundException("Person  not found"));
 				
-		person.setSocialSecurity(personRequest.getSocialSecurity());
-		person.setBirthDate(personRequest.getBirthDate());
-		person.setName(personRequest.getName());
-		person.setEmail(personRequest.getEmail());
+		personMapper.updateFromDto(personUpdateDto, person);
+		
 		return personRepository.save(person);
 		
 	}

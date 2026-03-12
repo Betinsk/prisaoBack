@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.federal.prision.person.dto.PersonDto;
+import com.federal.prision.person.dto.PersonUpdateDto;
 
 import jakarta.validation.Valid;
 
@@ -51,8 +52,8 @@ public class PersonController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody Person personRequest) {
-	  Person person = personService.updatePerson(id, personRequest);
+	public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody PersonUpdateDto personUpdateDto) {
+	  Person person = personService.updatePerson(id, personUpdateDto);
 	     return ResponseEntity.ok().body(person);
 	     }
 	
