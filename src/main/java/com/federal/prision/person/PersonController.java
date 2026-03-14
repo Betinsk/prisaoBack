@@ -33,7 +33,7 @@ public class PersonController {
 	}
 	*/
 	@PostMapping
-	public ResponseEntity<Person> createPersonWithAddress(/*/@Valid*/ @RequestBody PersonDto personDto) {
+	public ResponseEntity<Person> createPersonWithAddress(@Valid @RequestBody PersonDto personDto) {
 	    Person person = personService.createPersonWithAddress(personDto);
 	    return ResponseEntity.status(HttpStatus.CREATED).body(person);
 	}

@@ -19,7 +19,7 @@ public class AddressDto  implements Serializable {
 		@NotBlank(message = "City is required")
 		private String city;
 		
-		@NotBlank(message = "City is required")
+		@NotBlank(message = "Country is required")
 		private String country;
 		
 		private Long personId;
