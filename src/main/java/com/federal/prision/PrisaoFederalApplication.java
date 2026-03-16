@@ -39,7 +39,7 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Person personOne = new Person(null, "188148443", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com");
+	/*	Person personOne = new Person(null, "188148443", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com");
 		
 		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 		address.setPerson(personOne);
@@ -58,7 +58,7 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		inmate.getAddresses().add(inmateAddress); 
 		inmateRepository.saveAll(Arrays.asList(inmate, inmate2));
 		addressRepository.saveAll(Arrays.asList(inmateAddress));
-
+*/
 		
 	}
 
