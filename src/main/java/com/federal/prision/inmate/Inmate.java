@@ -19,9 +19,9 @@ public class Inmate extends Person{
 		 
 	 }
 
-	 public Inmate(Long id, String socialSecurity, LocalDate birthDate, String name, String email, String commitedCrime,
+	 public Inmate(Long id, String socialSecurity, LocalDate birthDate, String name, String email, String gender, String commitedCrime,
 			LocalDate arrestDate, Integer sentenceYears) {
-		super(id, socialSecurity, birthDate, name, email);
+		super(id, socialSecurity, birthDate, name, email, gender);
 		this.commitedCrime = commitedCrime;
 		this.arrestDate = arrestDate;
 		this.sentenceYears = sentenceYears;

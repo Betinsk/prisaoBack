@@ -19,6 +19,7 @@ src/main/resources/application-*.properties
 # Configurações sensíveis (NÃO subir)
 application-dev.properties
 application-prod.properties
+data/*.mv.db
 
 ### IntelliJ IDEA ###
 .idea
