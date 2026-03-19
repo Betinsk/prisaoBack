@@ -52,7 +52,7 @@ public class PersonController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Person> updatePerson(@PathVariable Long id, @RequestBody PersonUpdateDto personUpdateDto) {
+	public ResponseEntity<Person> updatePerson(@PathVariable Long id, @Valid @RequestBody PersonUpdateDto personUpdateDto) {
 	  Person person = personService.updatePerson(id, personUpdateDto);
 	     return ResponseEntity.ok().body(person);
 	     }
