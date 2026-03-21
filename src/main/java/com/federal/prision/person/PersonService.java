@@ -28,16 +28,7 @@ public class PersonService {
 	
     private final PersonMapper personMapper = new PersonMapper();
 
-	
-	public Person fromDto(PersonDto personDto) {
-		Person person = new Person();
-		person.setSocialSecurity(personDto.getSocialSecurity());
-	    person.setBirthDate(personDto.getBirthDate());
-		person.setName(personDto.getName());
-		person.setEmail(personDto.getEmail());
-	    return person;
-	}
-	
+
 	public Person createPerson(Person person) {
 		
 		if(personRepository.existsBySocialSecurity(person.getSocialSecurity())) {
@@ -49,7 +40,7 @@ public class PersonService {
 		
 		@Transactional
 		public Person createPersonWithAddress(PersonDto personDto) {
-		Person person = fromDto(personDto);
+		Person person = personMapper.fromDto(personDto);
 		createPerson(person);
 		List<AddressDto> addressDto = personDto.getAddresses();
 		 for (AddressDto dto : addressDto) {

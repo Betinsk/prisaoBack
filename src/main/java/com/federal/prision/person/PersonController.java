@@ -33,7 +33,7 @@ public class PersonController {
 	}
 	*/
 	@PostMapping
-	public ResponseEntity<Person> createPersonWithAddress(@Valid @RequestBody PersonDto personDto) {
+	public ResponseEntity<Person> createPersonWithAddress(@RequestBody @Valid PersonDto personDto) {
 	    Person person = personService.createPersonWithAddress(personDto);
 	    return ResponseEntity.status(HttpStatus.CREATED).body(person);
 	}
@@ -52,7 +52,7 @@ public class PersonController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Person> updatePerson(@PathVariable Long id, @Valid @RequestBody PersonUpdateDto personUpdateDto) {
+	public ResponseEntity<Person> updatePerson(@PathVariable Long id,  @RequestBody @Valid PersonUpdateDto personUpdateDto) {
 	  Person person = personService.updatePerson(id, personUpdateDto);
 	     return ResponseEntity.ok().body(person);
 	     }

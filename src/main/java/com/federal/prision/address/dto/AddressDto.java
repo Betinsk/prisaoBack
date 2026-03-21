@@ -10,7 +10,6 @@ public class AddressDto  implements Serializable {
 		@NotBlank(message = "Street name is required")
 		private String street;
 		
-		@NotBlank(message = "addressComplement name is required")
 		private String addressComplement;
 		
 		@NotBlank(message = "State is required")
