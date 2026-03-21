@@ -92,6 +92,15 @@ public class Person {
 		this.email = email;
 	}
 	
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
+	
 	public List<Address> getAddresses() {
 		return addresses;
 	}
@@ -125,14 +134,6 @@ public class Person {
 		return Objects.equals(id, other.id);
 	}
 
-	public String getGender() {
-		return gender;
-	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-	
-	
 
 }

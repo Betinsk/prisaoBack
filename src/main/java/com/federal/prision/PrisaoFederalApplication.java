@@ -8,9 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.federal.prision.address.Address;
 import com.federal.prision.address.AddressRepository;
+import com.federal.prision.auth.Role;
+import com.federal.prision.auth.User;
+import com.federal.prision.auth.UserRepository;
 import com.federal.prision.inmate.Inmate;
 import com.federal.prision.inmate.InmateRepository;
 import com.federal.prision.person.Person;
@@ -19,6 +23,11 @@ import com.federal.prision.person.PersonRepository;
 @SpringBootApplication
 public class PrisaoFederalApplication implements CommandLineRunner{
 
+	@Autowired
+	PasswordEncoder encoder;
+	
+	@Autowired
+	private UserRepository userRepository;	
 	
 	@Autowired
     private InmateRepository inmateRepository;
@@ -60,6 +69,14 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		addressRepository.saveAll(Arrays.asList(inmateAddress));
 
 		
+
+		User user = new User();
+		user.setEmail("admin@email.com");
+		user.setPassword(encoder.encode("123456"));
+		user.setRole(Role.ROLE_ADMIN);
+		user.setPerson(personOne);
+
+		userRepository.save(user);
 	}
 
 }
