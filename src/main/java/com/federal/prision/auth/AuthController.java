@@ -16,6 +16,9 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+    
+    @Autowired
+    private JwtService jwtService;
 
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest request) {
@@ -27,6 +30,6 @@ public class AuthController {
 
         authenticationManager.authenticate(auth);
 
-        return "Login OK"; // depois vira JWT
+        return jwtService.generateToken(request.email());
     }
 }

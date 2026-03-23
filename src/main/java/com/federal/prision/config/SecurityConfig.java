@@ -1,5 +1,6 @@
 package com.federal.prision.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,9 +10,15 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import com.federal.prision.auth.JwtFilter;
 
 @Configuration
 public class SecurityConfig {
+	
+	@Autowired
+	private JwtFilter jwtFilter;
 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
@@ -25,18 +32,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
+    	http
+        .csrf(csrf -> csrf.disable())
 
-                // 🔓 libera login
-                .requestMatchers("/auth/**").permitAll()
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/auth/**").permitAll()
+            .anyRequest().authenticated()
+        )
 
-                // 🔐 protege o resto
-                .anyRequest().authenticated()
-            ).sessionManagement(session -> 
+        .sessionManagement(session -> 
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        );
+        )
+
+        // 👇 AQUI É O PULO DO GATO
+        .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
