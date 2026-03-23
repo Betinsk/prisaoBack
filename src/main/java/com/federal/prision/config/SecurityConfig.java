@@ -33,13 +33,19 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     	http
-        .csrf(csrf -> csrf.disable())
+    	
+    	  .cors(cors -> {}) // ✅ NOVO JEITO
+    	
+    	  .csrf(csrf -> csrf.disable()) 
 
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/auth/**").permitAll()
+            .requestMatchers("/auth/**", "/h2-console/**").permitAll()
             .anyRequest().authenticated()
-        )
-
+        ) 
+        
+        .headers(headers -> 
+        headers.frameOptions(frame -> frame.disable()))
+        
         .sessionManagement(session -> 
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
