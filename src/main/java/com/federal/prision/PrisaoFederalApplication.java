@@ -51,8 +51,10 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		Person personOne = new Person(null, "188148443", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male");
 		
 		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
+		Address addressTwo = new Address(null, "123 main street Ave NW","Apt 4B","NM","TEXAS","US", personOne);
+
 		address.setPerson(personOne);
-		personOne.getAddresses().add(address);
+		personOne.getAddresses().addAll(Arrays.asList(address, addressTwo));
 		personRepository.saveAll(Arrays.asList(personOne));
 		addressRepository.saveAll(Arrays.asList(address));
 		
