@@ -13,6 +13,8 @@ import com.federal.prision.person.PersonService;
 import com.federal.prision.resource.exceptions.DatabaseException;
 import com.federal.prision.resource.exceptions.ResourceNotFoundException;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class InmateService {
 
@@ -33,15 +35,16 @@ public class InmateService {
 		inmate.setEmail(inmateDto.getEmail());
 		inmate.setGender(inmateDto.getGender());
 		inmate.setArrestDate(inmateDto.getArrestDate());
-		inmate.setSentenceYears(inmateDto.getSentenceYears());
+		inmate.setSentencedYears(inmateDto.getSentencedYears());
 		inmate.setCommitedCrime(inmateDto.getCommitedCrime());
 		return inmate;
 	}
 
-	public Inmate createInmate(InmateDto inmateDto) {
+	@Transactional
+	public Inmate createInmateWithAddress(InmateDto inmateDto) {
 
 	    Inmate inmate = fromDto(inmateDto);
-
+	    System.out.println(inmateDto);
 	    inmate = inmateRepository.save(inmate);
 
 	    List<AddressDto> addressDto = inmateDto.getAddresses();

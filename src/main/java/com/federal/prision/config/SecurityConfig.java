@@ -21,22 +21,22 @@ public class SecurityConfig {
 	private JwtFilter jwtFilter;
 
 	@Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+	AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
 	    return config.getAuthenticationManager();
 	}
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	PasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
 	
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    	http
-    	
-    	  .cors(cors -> {}) // ✅ NOVO JEITO
-    	
-    	  .csrf(csrf -> csrf.disable()) 
+        http
+        
+          .cors(cors -> {})
+        
+          .csrf(csrf -> csrf.disable()) 
 
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/auth/**", "/h2-console/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
@@ -44,13 +44,28 @@ public class SecurityConfig {
         ) 
         
         .headers(headers -> 
-        headers.frameOptions(frame -> frame.disable()))
+            headers.frameOptions(frame -> frame.disable())
+        )
         
         .sessionManagement(session -> 
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
 
-        // 👇 AQUI É O PULO DO GATO
+        // 👇 👉 COLOCA AQUI
+        .exceptionHandling(ex -> ex
+            .authenticationEntryPoint((request, response, authException) -> {
+                response.setStatus(500);
+                response.setContentType("application/json");
+                response.getWriter().write("{\"message\": \"Não autenticado\"}");
+            })
+            .accessDeniedHandler((request, response, accessDeniedException) -> {
+                response.setStatus(403);
+                response.setContentType("application/json");
+                response.getWriter().write("{\"message\": \"Acesso negado\"}");
+            })
+        )
+
+        // 👇 seu filtro continua aqui
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

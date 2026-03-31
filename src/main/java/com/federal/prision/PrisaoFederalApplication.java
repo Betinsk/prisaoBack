@@ -61,8 +61,8 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		Address inmateAddress = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 
 		
-		Inmate inmate = new Inmate(null, "549488545", LocalDate.parse("25/12/1971", formatter), "Whiter White", "WWhite@gmail.com", "Male", "Drug dealer", LocalDate.parse("25/05/2008", formatter), 32);
-		Inmate inmate2 = new Inmate(null, "84989", LocalDate.parse("21/12/1991", formatter), "Jessy Pinkman", "Pinkmane@gmail.com", "Male", "Drug dealer", LocalDate.parse("30/05/2008", formatter), 28);
+		Inmate inmate = new Inmate(null, "549488545", LocalDate.parse("25/12/1971", formatter), "Whiter White", "WWhite@gmail.com", "Male", "Drug dealer", LocalDate.parse("25/05/2008", formatter), "32");
+		Inmate inmate2 = new Inmate(null, "84989", LocalDate.parse("21/12/1991", formatter), "Jessy Pinkman", "Pinkmane@gmail.com", "Male", "Drug dealer", LocalDate.parse("30/05/2008", formatter), "28");
 		
 		
 		inmateAddress.setPerson(inmate);
