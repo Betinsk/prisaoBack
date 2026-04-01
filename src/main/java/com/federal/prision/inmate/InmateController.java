@@ -31,7 +31,7 @@ public class InmateController {
 	InmateService inmateService;
 	
 	@PostMapping
-	public ResponseEntity<Inmate> createInmate(@RequestBody InmateDto inmateDto) {
+	public ResponseEntity<Inmate> createInmate(@RequestBody @Valid InmateDto inmateDto) {
 		Inmate inmate = inmateService.createInmateWithAddress(inmateDto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(inmate);
 	}

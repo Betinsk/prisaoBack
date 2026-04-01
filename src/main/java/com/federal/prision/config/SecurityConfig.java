@@ -14,6 +14,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.federal.prision.auth.JwtFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
+
 @Configuration
 public class SecurityConfig {
 	
@@ -51,20 +53,18 @@ public class SecurityConfig {
             session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )
 
-        // 👇 👉 COLOCA AQUI
         .exceptionHandling(ex -> ex
-            .authenticationEntryPoint((request, response, authException) -> {
-                response.setStatus(500);
-                response.setContentType("application/json");
-                response.getWriter().write("{\"message\": \"Não autenticado\"}");
-            })
-            .accessDeniedHandler((request, response, accessDeniedException) -> {
-                response.setStatus(403);
-                response.setContentType("application/json");
-                response.getWriter().write("{\"message\": \"Acesso negado\"}");
-            })
-        )
-
+        	    .authenticationEntryPoint((request, response, authException) -> {
+        	        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        	        response.setContentType("application/json");
+        	        response.getWriter().write("{\"message\": \"Não autenticado\"}");
+        	    })
+        	    .accessDeniedHandler((request, response, accessDeniedException) -> {
+        	        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        	        response.setContentType("application/json");
+        	        response.getWriter().write("{\"message\": \"Acesso negado\"}");
+        	    })
+        	)
         // 👇 seu filtro continua aqui
         .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

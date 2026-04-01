@@ -63,5 +63,68 @@ import jakarta.servlet.http.HttpServletRequest;
     return ResponseEntity.status(status).body(err);
 	}
 	
+	@ExceptionHandler(org.springframework.dao.DataIntegrityViolationException.class)
+	public ResponseEntity<StandardError> handleDataIntegrity(
+	        Exception e,
+	        HttpServletRequest request) {
+
+	    HttpStatus status = HttpStatus.CONFLICT;
+
+	    StandardError err = new StandardError(
+	            System.currentTimeMillis(),
+	            status.value(),
+	            "Database error",
+	            "Violação de integridade (registro duplicado ou FK inválida)",
+	            request.getRequestURI()
+	    );
+
+	    return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(org.springframework.web.bind.MethodArgumentNotValidException.class)
+	public ResponseEntity<StandardError> handleValidation(
+	        org.springframework.web.bind.MethodArgumentNotValidException e,
+	        HttpServletRequest request) {
+
+	    StringBuilder sb = new StringBuilder();
+
+	    e.getBindingResult().getFieldErrors().forEach(error -> {
+	        sb.append(error.getField())
+	          .append(": ")
+	          .append(error.getDefaultMessage())
+	          .append("; ");
+	    });
+
+	    HttpStatus status = HttpStatus.BAD_REQUEST;
+
+	    StandardError err = new StandardError(
+	            System.currentTimeMillis(),
+	            status.value(),
+	            "Validation error",
+	            sb.toString(),
+	            request.getRequestURI()
+	    );
+
+	    return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
+	public ResponseEntity<StandardError> handleMethodNotAllowed(
+	        org.springframework.web.HttpRequestMethodNotSupportedException e,
+	        HttpServletRequest request) {
+
+	    HttpStatus status = HttpStatus.METHOD_NOT_ALLOWED; // 405
+
+	    StandardError err = new StandardError(
+	            System.currentTimeMillis(),
+	            status.value(),
+	            "Method not allowed",
+	            e.getMessage(),
+	            request.getRequestURI()
+	    );
+
+	    return ResponseEntity.status(status).body(err);
+	}
+	
 }
 			
