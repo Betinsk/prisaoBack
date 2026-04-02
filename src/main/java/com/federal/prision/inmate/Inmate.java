@@ -13,18 +13,18 @@ public class Inmate extends Person{
 
 	private LocalDate arrestDate;
 
-	 private Integer sentenceYears;
+	 private String sentencedYears;
 	
 	 public Inmate() {
 		 
 	 }
 
 	 public Inmate(Long id, String socialSecurity, LocalDate birthDate, String name, String email, String gender, String commitedCrime,
-			LocalDate arrestDate, Integer sentenceYears) {
+			LocalDate arrestDate, String sentencedYears) {
 		super(id, socialSecurity, birthDate, name, email, gender);
 		this.commitedCrime = commitedCrime;
 		this.arrestDate = arrestDate;
-		this.sentenceYears = sentenceYears;
+		this.sentencedYears = sentencedYears;
 	 }
 
 	 public String getCommitedCrime() {
@@ -43,12 +43,12 @@ public class Inmate extends Person{
 		 this.arrestDate = arrestDate;
 	 }
 
-	 public Integer getSentenceYears() {
-		 return sentenceYears;
+	 public String getSentencedYears() {
+		 return sentencedYears;
 	 }
 
-	 public void setSentenceYears(Integer sentenceYears) {
-		 this.sentenceYears = sentenceYears;
+	 public void setSentencedYears(String sentencedYears) {
+		 this.sentencedYears = sentencedYears;
 	 }
 	 
 	 

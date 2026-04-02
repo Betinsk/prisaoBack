@@ -14,17 +14,17 @@ public class InmateDto extends PersonDto {
 
 	private LocalDate arrestDate;
 
-	 private Integer sentenceYears;
+	 private String sentencedYears;
 
 	 public InmateDto(@NotBlank(message = "Social Security is required") String socialSecurity,
 			@NotNull(message = "Date of birth is required") @Past LocalDate birthDate,
 			@NotBlank(message = "Name is required") String name, @NotBlank(message = "Email is required") String email,
 			@NotBlank(message = "Gender cannot be empty") String gender, String commitedCrime, LocalDate arrestDate,
-			Integer sentenceYears) {
+			String sentencedYears) {
 		super(socialSecurity, birthDate, name, email, gender);
 		this.commitedCrime = commitedCrime;
 		this.arrestDate = arrestDate;
-		this.sentenceYears = sentenceYears;
+		this.sentencedYears = sentencedYears;
 	 }
 
 	 public String getCommitedCrime() {
@@ -43,12 +43,12 @@ public class InmateDto extends PersonDto {
 		 this.arrestDate = arrestDate;
 	 }
 
-	 public Integer getSentenceYears() {
-		 return sentenceYears;
+	 public String getSentencedYears() {
+		 return sentencedYears;
 	 }
 
-	 public void setSentenceYears(Integer sentenceYears) {
-		 this.sentenceYears = sentenceYears;
+	 public void setSentencedYears(String sentencedYears) {
+		 this.sentencedYears = sentencedYears;
 	 }
 	 
 	 

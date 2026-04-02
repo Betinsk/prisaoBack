@@ -30,14 +30,11 @@ public class InmateController {
 	@Autowired
 	InmateService inmateService;
 	
-    
-    
 	@PostMapping
 	public ResponseEntity<Inmate> createInmate(@RequestBody @Valid InmateDto inmateDto) {
-		Inmate inmate = inmateService.createInmate(inmateDto);
+		Inmate inmate = inmateService.createInmateWithAddress(inmateDto);
 		return ResponseEntity.status(HttpStatus.CREATED).body(inmate);
 	}
-	
 	
 	@GetMapping
 	public ResponseEntity<List<Inmate>> findAll() {
