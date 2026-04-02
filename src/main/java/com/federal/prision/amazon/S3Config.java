@@ -14,7 +14,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 @Configuration
 public class S3Config {
 
-    @Value("${aws.accessKey}")
+ /*   @Value("${aws.accessKey}")
     private String accessKey;
 
     @Value("${aws.secretKey}")
@@ -33,5 +33,5 @@ public class S3Config {
                     )
                 )
                 .build();
-    }
+    } */
 }

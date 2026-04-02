@@ -11,7 +11,7 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 @Service
 public class S3Service {
 
-    @Autowired
+ /*   @Autowired
     private S3Client s3Client;
 
     @Value("${aws.bucket.name}")
@@ -27,5 +27,5 @@ public class S3Service {
                 request,
                 RequestBody.fromBytes(content)
         );
-    }
+    }*/
 }
