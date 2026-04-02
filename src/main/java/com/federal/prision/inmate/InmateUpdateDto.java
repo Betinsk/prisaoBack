@@ -2,14 +2,12 @@ package com.federal.prision.inmate;
 
 import java.time.LocalDate;
 
-import com.federal.prision.person.dto.PersonDto;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 
-public class InmateDto extends PersonDto {
-
+public class InmateUpdateDto {
+	
 	@NotBlank(message = "Cannot be empty")
 	private String commitedCrime;
 
@@ -20,15 +18,10 @@ public class InmateDto extends PersonDto {
 	@NotBlank(message = "Cannot be empty")
 	 private String sentencedYears;
 
-	
-	 public InmateDto(@NotBlank(message = "Social Security is required") String socialSecurity,
-			@NotNull(message = "Date of birth is required") @Past LocalDate birthDate,
-			@NotBlank(message = "Name is required") String name, @NotBlank(message = "Email is required") String email,
-			@NotBlank(message = "Gender cannot be empty") String gender,
-			@NotBlank(message = "Cannot be empty") String commitedCrime,
-			@Past LocalDate arrestDate,
+	 public InmateUpdateDto(@NotBlank(message = "Cannot be empty") String commitedCrime,
+			@NotBlank(message = "Cannot be empty") LocalDate arrestDate,
 			@NotBlank(message = "Cannot be empty") String sentencedYears) {
-		super(socialSecurity, birthDate, name, email, gender);
+		super();
 		this.commitedCrime = commitedCrime;
 		this.arrestDate = arrestDate;
 		this.sentencedYears = sentencedYears;
@@ -57,7 +50,6 @@ public class InmateDto extends PersonDto {
 	 public void setSentencedYears(String sentencedYears) {
 		 this.sentencedYears = sentencedYears;
 	 }
-	 
-	 
+
 	 
 }

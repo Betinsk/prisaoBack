@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import com.federal.prision.address.Address;
 import com.federal.prision.address.AddressService;
 import com.federal.prision.address.dto.AddressDto;
+import com.federal.prision.person.Person;
 import com.federal.prision.person.PersonService;
+import com.federal.prision.person.dto.PersonUpdateDto;
 import com.federal.prision.resource.exceptions.DatabaseException;
 import com.federal.prision.resource.exceptions.ResourceNotFoundException;
 
@@ -39,7 +41,13 @@ public class InmateService {
 		inmate.setCommitedCrime(inmateDto.getCommitedCrime());
 		return inmate;
 	}
-
+	
+	public void updateFromDto(InmateUpdateDto inmateUpdateDto, Inmate inmate) {
+		inmate.setArrestDate(inmateUpdateDto.getArrestDate());
+		inmate.setSentencedYears(inmateUpdateDto.getSentencedYears());
+		inmate.setCommitedCrime(inmateUpdateDto.getCommitedCrime());
+	}
+	
 	@Transactional
 	public Inmate createInmateWithAddress(InmateDto inmateDto) {
 
@@ -64,6 +72,16 @@ public class InmateService {
 	public Inmate findById(Long id) {
 		return inmateRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Inmate not found. Id: " + id));
+	}
+	
+	public Inmate updateInmate(Long id, InmateUpdateDto inmateUpdateDto) {
+		Inmate inmate = inmateRepository.findById(id).orElseThrow(
+		() -> new ResourceNotFoundException("Inmate not found"));
+				
+		updateFromDto(inmateUpdateDto, inmate);
+		
+		return inmateRepository.save(inmate);
+		
 	}
 
 	public void deleteInmate(Long id) {

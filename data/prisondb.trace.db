@@ -1120,3 +1120,21 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 90 more
+2026-04-02 17:47:09.589651-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "COMMITED_CRIME CHARACTER VARYING(255)": "U&'Drug dealaaa, assautl office in service during the night, he make one person ... (439)"; SQL statement:
+update inmate set arrest_date=?,commited_crime=?,sentenced_years=? where id=? [22001-224]
+2026-04-02 17:47:19.308570-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "COMMITED_CRIME CHARACTER VARYING(255)": "U&'Drug dealaaa, assautl office in service during the night, he make one person ... (443)"; SQL statement:
+update inmate set arrest_date=?,commited_crime=?,sentenced_years=? where id=? [22001-224]
+2026-04-02 17:47:28.716653-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "COMMITED_CRIME CHARACTER VARYING(255)": "U&'Drug dealaaa, assautl office in service during the night, he make one person ... (453)"; SQL statement:
+update inmate set arrest_date=?,commited_crime=?,sentenced_years=? where id=? [22001-224]
+2026-04-02 17:47:54.778282-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "COMMITED_CRIME CHARACTER VARYING(255)": "U&'Drug dealaaa, assautl office in service during the night, he make one person ... (402)"; SQL statement:
+update inmate set arrest_date=?,commited_crime=?,sentenced_years=? where id=? [22001-224]
+2026-04-02 17:47:57.891992-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "COMMITED_CRIME CHARACTER VARYING(255)": "U&'Drug dealaaa, assautl office in service during the night, he make one person ... (366)"; SQL statement:
+update inmate set arrest_date=?,commited_crime=?,sentenced_years=? where id=? [22001-224]
+2026-04-02 17:48:02.266199-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "COMMITED_CRIME CHARACTER VARYING(255)": "U&'Drug dealaaa, assautl office in service during the night, he make one person ... (312)"; SQL statement:
+update inmate set arrest_date=?,commited_crime=?,sentenced_years=? where id=? [22001-224]

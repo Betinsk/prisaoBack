@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class S3Controller {
 
-	
+/*	
 	@Autowired
 	S3Service s3Service;
 	
@@ -24,5 +24,5 @@ public class S3Controller {
 	        return ResponseEntity.internalServerError().body("Erro no upload");
 	    }
 	}
-	
+	*/
 }
