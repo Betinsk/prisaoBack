@@ -1,28 +1,36 @@
 package com.federal.prision.amazon;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import java.util.UUID;
+
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+@RestController
 public class S3Controller {
 
-/*	
-	@Autowired
-	S3Service s3Service;
-	
-	@PostMapping("/files/upload")
-	public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file) {
+    private final S3Service s3Service;
 
-	    try {
-	        String key = file.getOriginalFilename();
-	        s3Service.uploadFile(key, file.getBytes());
+    public S3Controller(S3Service s3Service) {
+        this.s3Service = s3Service;
+    }
 
-	        return ResponseEntity.ok("Upload feito: " + key);
-	    } catch (Exception e) {
-	        return ResponseEntity.internalServerError().body("Erro no upload");
-	    }
-	}
-	*/
+    @PostMapping("/upload/{id}")
+    public String upload(@RequestParam("file") MultipartFile file,
+                         @PathVariable Long id) throws Exception {
+
+        String key = UUID.randomUUID() + "-" + file.getOriginalFilename();
+
+        String url = s3Service.uploadFile(
+            key,
+            file,
+            id
+        );
+
+        return url; 
+    }
+    
+    
 }

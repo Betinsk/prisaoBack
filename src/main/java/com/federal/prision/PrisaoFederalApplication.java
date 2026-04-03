@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.federal.prision.address.Address;
@@ -19,6 +20,8 @@ import com.federal.prision.inmate.Inmate;
 import com.federal.prision.inmate.InmateRepository;
 import com.federal.prision.person.Person;
 import com.federal.prision.person.PersonRepository;
+
+import software.amazon.awssdk.services.s3.S3Client;
 
 @SpringBootApplication
 public class PrisaoFederalApplication implements CommandLineRunner{
@@ -48,7 +51,7 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Person personOne = new Person(null, "645984", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male");
+		Person personOne = new Person(null, "645984", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male", "https://bucket-federalprision.s3.us-east-2.amazonaws.com/Captura+de+tela+2025-10-29+202445.png");
 		
 		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 		Address addressTwo = new Address(null, "123 main street Ave NW","Apt 4B","NM","TEXAS","US", personOne);
@@ -61,8 +64,10 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		Address inmateAddress = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 
 		
-		Inmate inmate = new Inmate(null, "549488545", LocalDate.parse("25/12/1971", formatter), "Whiter White", "WWhite@gmail.com", "Male", "Drug dealer", LocalDate.parse("25/05/2008", formatter), "32");
-		Inmate inmate2 = new Inmate(null, "84989", LocalDate.parse("21/12/1991", formatter), "Jessy Pinkman", "Pinkmane@gmail.com", "Male", "Drug dealer", LocalDate.parse("30/05/2008", formatter), "28");
+		Inmate inmate = new Inmate(null, "549488545", LocalDate.parse("25/12/1971", formatter), "Whiter White", "WWhite@gmail.com", "Male",
+				"https://bucket-federalprision.s3.us-east-2.amazonaws.com/Captura+de+tela+2025-10-29+202445.png","Drug dealer", LocalDate.parse("25/05/2008", formatter), "32");
+		Inmate inmate2 = new Inmate(null, "84989", LocalDate.parse("21/12/1991", formatter), "Jessy Pinkman", "Pinkmane@gmail.com", "Male",
+				"https://bucket-federalprision.s3.us-east-2.amazonaws.com/Captura+de+tela+2025-10-29+202445.png","Drug dealer", LocalDate.parse("30/05/2008", formatter), "28");
 		
 		
 		inmateAddress.setPerson(inmate);
@@ -80,5 +85,11 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 
 		userRepository.save(user); 
 	}
-
+	@Bean
+	public CommandLineRunner testS3(S3Client s3Client) {
+	    return args -> {
+	        s3Client.listBuckets().buckets()
+	                .forEach(b -> System.out.println(b.name()));
+	    };
+	}
 }

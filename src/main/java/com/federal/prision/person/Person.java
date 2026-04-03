@@ -34,6 +34,8 @@ public class Person {
 	private String email;
 	private String gender;
 	
+	private String imageUrl;
+	
 	
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
@@ -43,13 +45,14 @@ public class Person {
 	public Person() {
 	}
 
-	public Person(Long id, String socialSecurity, LocalDate birthDate, String name, String email, String gender) {
+	public Person(Long id, String socialSecurity, LocalDate birthDate, String name, String email, String gender, String imageUrl) {
 		this.id = id;
 		this.socialSecurity = socialSecurity;
 		this.birthDate = birthDate;
 		this.name = name;
 		this.email = email;
 		this.gender = gender;
+		this.imageUrl = imageUrl;
 	}
 
 	public Long getId() {
@@ -132,6 +135,14 @@ public class Person {
 			return false;
 		Person other = (Person) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 
