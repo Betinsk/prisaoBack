@@ -51,7 +51,7 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Person personOne = new Person(null, "645984", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male", "https://bucket-federalprision.s3.us-east-2.amazonaws.com/Captura+de+tela+2025-10-29+202445.png");
+	/*	Person personOne = new Person(null, "645984", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male");
 		
 		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 		Address addressTwo = new Address(null, "123 main street Ave NW","Apt 4B","NM","TEXAS","US", personOne);
@@ -65,10 +65,9 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 
 		
 		Inmate inmate = new Inmate(null, "549488545", LocalDate.parse("25/12/1971", formatter), "Whiter White", "WWhite@gmail.com", "Male",
-				"https://bucket-federalprision.s3.us-east-2.amazonaws.com/Captura+de+tela+2025-10-29+202445.png","Drug dealer", LocalDate.parse("25/05/2008", formatter), "32");
-		Inmate inmate2 = new Inmate(null, "84989", LocalDate.parse("21/12/1991", formatter), "Jessy Pinkman", "Pinkmane@gmail.com", "Male",
-				"https://bucket-federalprision.s3.us-east-2.amazonaws.com/Captura+de+tela+2025-10-29+202445.png","Drug dealer", LocalDate.parse("30/05/2008", formatter), "28");
-		
+				"Drug dealer", LocalDate.parse("25/05/2008", formatter), "32");
+		Inmate inmate2 = new Inmate(null, "5491488545", LocalDate.parse("25/12/1971", formatter), "Whiter White", "WWhite@gmail.com", "Male",
+				"Drug dealer", LocalDate.parse("25/05/2008", formatter), "32");
 		
 		inmateAddress.setPerson(inmate);
 		inmate.getAddresses().add(inmateAddress); 
@@ -91,5 +90,6 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	        s3Client.listBuckets().buckets()
 	                .forEach(b -> System.out.println(b.name()));
 	    };
+	}*/
 	}
 }

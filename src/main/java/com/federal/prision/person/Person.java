@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.federal.prision.address.Address;
+import com.federal.prision.images.Mugshot;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,25 +35,26 @@ public class Person {
 	private String email;
 	private String gender;
 	
-	private String imageUrl;
-	
+	private String profilePictureUrl;
 	
 	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	private List<Address> addresses = new ArrayList<>();
 
+	@OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Mugshot> mugshots;
 	
 	public Person() {
 	}
 
-	public Person(Long id, String socialSecurity, LocalDate birthDate, String name, String email, String gender, String imageUrl) {
+	public Person(Long id, String socialSecurity, LocalDate birthDate, String name, String email, String gender) {
 		this.id = id;
 		this.socialSecurity = socialSecurity;
 		this.birthDate = birthDate;
 		this.name = name;
 		this.email = email;
 		this.gender = gender;
-		this.imageUrl = imageUrl;
 	}
 
 	public Long getId() {
@@ -108,6 +110,26 @@ public class Person {
 		return addresses;
 	}
 	
+
+	public String getProfilePictureUrl() {
+		return profilePictureUrl;
+	}
+
+	public void setProfilePictureUrl(String profilePictureUrl) {
+		this.profilePictureUrl = profilePictureUrl;
+	}
+
+	
+
+	public List<Mugshot> getMugshots() {
+		return mugshots;
+	}
+
+	public void setMugshots(List<Mugshot> mugshots) {
+		this.mugshots = mugshots;
+	}
+
+	
 	public void addAddress(Address address) {
 	    addresses.add(address);
 	    address.setPerson(this); // garante que o lado dono da relação saiba quem é o Person
@@ -137,14 +159,7 @@ public class Person {
 		return Objects.equals(id, other.id);
 	}
 
-	public String getImageUrl() {
-		return imageUrl;
-	}
 
-	public void setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-	}
-
-
+	
 
 }

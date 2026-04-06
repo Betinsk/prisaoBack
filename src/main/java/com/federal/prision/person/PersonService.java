@@ -1,14 +1,20 @@
 package com.federal.prision.person;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.federal.prision.address.Address;
 import com.federal.prision.address.AddressService;
 import com.federal.prision.address.dto.AddressDto;
+import com.federal.prision.amazon.S3Service;
+import com.federal.prision.images.Mugshot;
+import com.federal.prision.images.MugshotRepository;
 import com.federal.prision.mapper.PersonMapper;
 import com.federal.prision.person.dto.PersonDto;
 import com.federal.prision.person.dto.PersonUpdateDto;
@@ -24,7 +30,13 @@ public class PersonService {
 	PersonRepository personRepository;
 	
 	@Autowired
+	MugshotRepository mugshotRepository;;
+	
+	@Autowired
 	AddressService addressService;
+	
+	@Autowired
+	S3Service s3Service;
 	
     private final PersonMapper personMapper = new PersonMapper();
 
@@ -37,18 +49,19 @@ public class PersonService {
 		return personRepository.save(person);
 	}
 	
-		
-		@Transactional
-		public Person createPersonWithAddress(PersonDto personDto) {
-		Person person = personMapper.fromDto(personDto);
-		createPerson(person);
-		List<AddressDto> addressDto = personDto.getAddresses();
-		 for (AddressDto dto : addressDto) {
-		        Address address = addressService.fromDto(dto);
-		        addressService.createAddress(address, person.getId());
-		    }
-		return person;
+	@Transactional
+	public Person createPersonWithAddress(PersonDto personDto) {
 
+	    Person person = personMapper.fromDto(personDto);
+	    createPerson(person);
+
+	    for (AddressDto dto : personDto.getAddresses()) {
+	        Address address = addressService.fromDto(dto);
+	        addressService.createAddress(address, person.getId());
+	    }
+
+
+	    return person;
 	}
 	
 	

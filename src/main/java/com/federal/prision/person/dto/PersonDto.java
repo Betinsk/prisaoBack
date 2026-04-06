@@ -3,6 +3,7 @@ package com.federal.prision.person.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.federal.prision.address.dto.AddressDto;
 
 import jakarta.validation.Valid;
@@ -18,6 +19,7 @@ public class PersonDto {
 
     @NotNull(message = "Date of birth is required")
     @Past
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @NotBlank(message = "Name is required")
@@ -35,11 +37,12 @@ public class PersonDto {
 
     public PersonDto() {
     }
+ 
     
+
 	public PersonDto(@NotBlank(message = "Social Security is required") String socialSecurity,
 			@NotNull(message = "Date of birth is required") @Past LocalDate birthDate,
-			@NotBlank(message = "Name is required") String name,
-			@NotBlank(message = "Email is required") String email,
+			@NotBlank(message = "Name is required") String name, @NotBlank(message = "Email is required") String email,
 			@NotBlank(message = "Gender cannot be empty") String gender) {
 		this.socialSecurity = socialSecurity;
 		this.birthDate = birthDate;
@@ -47,6 +50,7 @@ public class PersonDto {
 		this.email = email;
 		this.gender = gender;
 	}
+
 
 	public String getSocialSecurity() {
 		return socialSecurity;
@@ -95,8 +99,6 @@ public class PersonDto {
 	public void setAddresses(List<AddressDto> addresses) {
 		this.addresses = addresses;
 	}
-	
-
 	
     
 }
