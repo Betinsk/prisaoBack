@@ -4,11 +4,13 @@ import java.util.UUID;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@RequestMapping("/files") 
 public class S3Controller {
 
     private final S3Service s3Service;
@@ -37,6 +39,8 @@ public class S3Controller {
     @PostMapping("/uploadMugshot/{id}")
     public String uploadMugshot(@RequestParam("file") MultipartFile file,
                          @PathVariable Long id) throws Exception {
+        System.out.println("CHEGOU NO ENDPOINT"); // 👈 adiciona isso
+
 
         String key = UUID.randomUUID() + "-" + file.getOriginalFilename();
 

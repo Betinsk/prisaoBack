@@ -31,46 +31,49 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         final String authHeader = request.getHeader("Authorization");
-
         String token = null;
         String email = null;
 
         try {
-            // 🔐 pega o token
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 token = authHeader.substring(7);
-                email = jwtService.extractUsername(token); // 👈 pode explodir
+                email = jwtService.extractUsername(token);
             }
 
-            // 🔥 autentica o usuário
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email); // 👈 pode lançar UsernameNotFoundException
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,
                                 null,
                                 userDetails.getAuthorities()
                         );
-
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
-            
-            System.out.println("DEU CERTO");
 
         } catch (io.jsonwebtoken.JwtException e) {
-            // 👈 erro de token → 401 controlado
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.setContentType("application/json");
-            response.getWriter().write("{\"message\": \"Token inválido ou expirado\"}");
-            return;
+            sendError(response, "Token inválido ou expirado");
+            return; // 👈 PARA o filtro aqui
+
+        } catch (org.springframework.security.core.userdetails.UsernameNotFoundException e) {
+            sendError(response, "Usuário não encontrado");
+            return; // 👈 PARA o filtro aqui
+
+        } catch (Exception e) {
+            sendError(response, "Erro de autenticação");
+            return; // 👈 captura qualquer outro erro inesperado
         }
 
-        // 👉 MUITO IMPORTANTE: deixa o resto da aplicação rodar
         filterChain.doFilter(request, response);
+    }
+
+    // 👇 método auxiliar para não repetir código
+    private void sendError(HttpServletResponse response, String message) throws IOException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"message\": \"" + message + "\"}");
     }
     
 }

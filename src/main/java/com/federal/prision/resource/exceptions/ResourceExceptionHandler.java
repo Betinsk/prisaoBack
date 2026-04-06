@@ -2,7 +2,7 @@ package com.federal.prision.resource.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -124,6 +124,22 @@ import jakarta.servlet.http.HttpServletRequest;
 	    );
 
 	    return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(BadCredentialsException.class)
+	public ResponseEntity<StandardError> handleBadCredentials(
+	        BadCredentialsException e,
+	        HttpServletRequest request) {
+
+	    StandardError err = new StandardError(
+	            System.currentTimeMillis(),
+	            HttpStatus.UNAUTHORIZED.value(),
+	            "Unauthorized",
+	            "Email ou senha incorretos",
+	            request.getRequestURI()
+	    );
+
+	    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(err);
 	}
 	
 }

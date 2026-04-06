@@ -41,9 +41,14 @@ public class SecurityConfig {
           .csrf(csrf -> csrf.disable()) 
 
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/auth/**", "/h2-console/**", 
-            		"/files/**",
-            		"/swagger-ui/**", "/v3/api-docs/**").permitAll()
+        		.requestMatchers(
+        			    "/auth/**",
+        			    "/h2-console/**",
+        			    "/files/**",
+        			    "/swagger-ui/**",
+        			    "/swagger-ui.html",
+        			    "/v3/api-docs/**"  
+        			).permitAll()
             .anyRequest().authenticated()
         ) 
         

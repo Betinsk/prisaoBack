@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.federal.prision.address.dto.AddressDto;
 import com.federal.prision.person.dto.PersonDto;
 import com.federal.prision.person.dto.PersonUpdateDto;
 
@@ -26,18 +27,17 @@ public class PersonController {
 	@Autowired
 	PersonService personService; 
 	
-/*	@PostMapping
-	public ResponseEntity<Person> createPerson(@RequestBody @Valid PersonDto personDto) {
-		Person newPerson = personService.createPerson(personService.fromDto(personDto));
-		return ResponseEntity.status(HttpStatus.CREATED).body(newPerson);
-	}
-	*/
 	@PostMapping
 	public ResponseEntity<Person> createPersonWithAddress(@RequestBody @Valid PersonDto personDto) {
 	    Person person = personService.createPersonWithAddress(personDto);
 	    return ResponseEntity.status(HttpStatus.CREATED).body(person);
 	}
 	
+	@PostMapping("/{id}/address")
+	public ResponseEntity<Person> addAddress(@PathVariable Long id, @RequestBody @Valid AddressDto addressDto) {
+	    Person person = personService.addAddress(id, addressDto);
+	    return ResponseEntity.status(HttpStatus.CREATED).body(person);
+	}
 	
 	@GetMapping
 	public ResponseEntity<List<Person>> findAll() {

@@ -51,7 +51,7 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-	/*	Person personOne = new Person(null, "645984", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male");
+		Person personOne = new Person(null, "645984", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male");
 		
 		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 		Address addressTwo = new Address(null, "123 main street Ave NW","Apt 4B","NM","TEXAS","US", personOne);
@@ -84,12 +84,5 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 
 		userRepository.save(user); 
 	}
-	@Bean
-	public CommandLineRunner testS3(S3Client s3Client) {
-	    return args -> {
-	        s3Client.listBuckets().buckets()
-	                .forEach(b -> System.out.println(b.name()));
-	    };
-	}*/
-	}
+	
 }

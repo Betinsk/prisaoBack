@@ -1,19 +1,15 @@
 package com.federal.prision.person;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.federal.prision.address.Address;
 import com.federal.prision.address.AddressService;
 import com.federal.prision.address.dto.AddressDto;
 import com.federal.prision.amazon.S3Service;
-import com.federal.prision.images.Mugshot;
 import com.federal.prision.images.MugshotRepository;
 import com.federal.prision.mapper.PersonMapper;
 import com.federal.prision.person.dto.PersonDto;
@@ -62,6 +58,14 @@ public class PersonService {
 
 
 	    return person;
+	}
+	
+	@Transactional
+	public Person addAddress(Long id, AddressDto addressDto) {
+	    Person person = findById(id);
+	    Address address = addressService.fromDto(addressDto);
+	    addressService.createAddress(address, person.getId());
+	    return findById(id);
 	}
 	
 	
