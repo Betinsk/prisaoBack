@@ -51,7 +51,7 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Person personOne = new Person(null, "645984", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male");
+	/*	Person personOne = new Person(null, "645984", LocalDate.parse("25/12/1971", formatter) , "Whiter White", "WWhite@gmail.com", "Male");
 		
 		Address address = new Address(null, "123 Central Ave NW","Apt 4B","NM","Albuquerque","US", personOne);
 		Address addressTwo = new Address(null, "123 main street Ave NW","Apt 4B","NM","TEXAS","US", personOne);
@@ -82,7 +82,7 @@ public class PrisaoFederalApplication implements CommandLineRunner{
 		user.setRole(Role.ROLE_ADMIN);
 		user.setPerson(personOne);
 
-		userRepository.save(user); 
+		userRepository.save(user); */
 	}
 	
 }
